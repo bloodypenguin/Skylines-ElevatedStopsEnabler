@@ -72,6 +72,34 @@ namespace ElevatedStopsEnabler
                 Log.Error($"Failed on EnableStops {e}");
             }
         }
+
+        public static void AllowStreetLightsOnElevatedStops()
+        {
+            for (uint i = 0; i < PrefabCollection<NetInfo>.LoadedCount(); i++)
+            {
+                var netInfo = PrefabCollection<NetInfo>.GetLoaded(i);
+
+                if (netInfo == null || netInfo.m_lanes == null || !netInfo.m_hasPedestrianLanes) continue;
+
+                if (!(netInfo.m_netAI is RoadBridgeAI)) continue;
+
+                foreach (NetInfo.Lane lane in netInfo.m_lanes)
+                {
+                    if (lane == null || lane.m_laneType != NetInfo.LaneType.Pedestrian || lane.m_laneProps == null || lane.m_laneProps.m_props == null) continue;
+
+                    //if (!lane.m_elevated) return;
+
+                    foreach (NetLaneProps.Prop laneProp in lane.m_laneProps.m_props)
+                    {
+                        if (laneProp != null && laneProp.m_prop != null && laneProp.m_prop.name.Contains("Street Light"))
+                        {
+                            laneProp.m_flagsForbidden = NetLane.Flags.None;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public static class ElevatedStopsExtensions

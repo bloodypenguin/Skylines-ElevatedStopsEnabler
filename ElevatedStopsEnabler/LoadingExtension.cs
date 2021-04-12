@@ -16,6 +16,7 @@ namespace ElevatedStopsEnabler
             try
             {
                 ElevatedStops.AddElevatedStoptypes();
+                ElevatedStops.AllowStreetLightsOnElevatedStops();
 
                 if (HarmonyHelper.IsHarmonyInstalled)
                 {
