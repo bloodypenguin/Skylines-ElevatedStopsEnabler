@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Linq;
+using ElevatedStopsEnabler.Patch;
 using ICities;
 using ElevatedStopsEnabler.Util;
-using CitiesHarmony.API;
 
 namespace ElevatedStopsEnabler
 {
@@ -17,13 +16,10 @@ namespace ElevatedStopsEnabler
             {
                 ElevatedStops.AddElevatedStoptypes();
                 ElevatedStops.AllowStreetLightsOnElevatedStops();
-
-                if (HarmonyHelper.IsHarmonyInstalled)
-                {
-                    Patcher.PatchAll();
-                    Log.Info("Patches deployed");
-                }
-                else Log.Info("Harmony not found");
+                NetSegmentPatch_GetClosestLanePosition.Apply();
+                TransportLineAIPatch_AddLaneConnection.Apply();
+                TransportLineAIPatch_RemoveLaneConnection.Apply();
+                Log.Info("Patches deployed");
             }
             catch (Exception e)
             {
@@ -35,12 +31,10 @@ namespace ElevatedStopsEnabler
         {
             try
             {
-                if (HarmonyHelper.IsHarmonyInstalled)
-                {
-                    Patcher.UnpatchAll();
-                    Log.Info("patching reverted");
-                }
-                else Log.Info("Harmony not found");
+                NetSegmentPatch_GetClosestLanePosition.Undo();
+                TransportLineAIPatch_AddLaneConnection.Undo();
+                TransportLineAIPatch_RemoveLaneConnection.Undo();
+                Log.Info("patching reverted");
             }
             catch (Exception e)
             {
