@@ -31,12 +31,11 @@ namespace ElevatedStopsEnabler.Patch
 
         static bool Prefix(ref NetSegment __instance, NetInfo.LaneType laneTypes, VehicleInfo.VehicleType vehicleTypes, ref bool requireConnect)
         {
-            if (!requireConnect) return true;
-            __instance.GetClosestLane(0, laneTypes, vehicleTypes, out int laneindex, out uint laneID);
-            var segment = Singleton<NetManager>.instance.m_lanes.m_buffer[laneID].m_segment;
-            var roadAi = Singleton<NetManager>.instance.m_segments.m_buffer[segment].Info.m_netAI;
-            if (!(roadAi is RoadBridgeAI)) return true;
-            requireConnect = false;
+            if (requireConnect && __instance.Info.m_netAI is RoadBridgeAI)
+            {
+                requireConnect = false;
+            }
+
             return true;
         }
     }
