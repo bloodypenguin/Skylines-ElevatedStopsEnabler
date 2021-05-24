@@ -58,11 +58,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElevatedStops.cs" />
+    <Compile Include="HarmonyPatches\NetSegmentPatches\GetClosestLanePositionPatch.cs" />
+    <Compile Include="HarmonyPatches\TransportLineAIPatches\AddLaneConnectionPatch.cs" />
+    <Compile Include="HarmonyPatches\TransportLineAIPatches\RemoveLaneConnectionPatch.cs" />
     <Compile Include="LoadingExtension.cs" />
     <Compile Include="Mod.cs" />
-    <Compile Include="Patch\NetSegmentPatch_GetClosestLanePosition.cs" />
-    <Compile Include="Patch\TransportLineAIPatch_AddLaneConnection.cs" />
-    <Compile Include="Patch\TransportLineAIPatch_RemoveLaneConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoadBridgeAiExt.cs" />
     <Compile Include="Util\Log.cs" />

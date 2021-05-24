@@ -1,11 +1,9 @@
-﻿using System;
-using ColossalFramework;
-using ElevatedStopsEnabler.Util;
+﻿using ElevatedStopsEnabler.Util;
 using UnityEngine;
 
-namespace ElevatedStopsEnabler.Patch
+namespace ElevatedStopsEnabler.HarmonyPatches.NetSegmentPatches
 {
-    internal class NetSegmentPatch_GetClosestLanePosition
+    internal class GetClosestLanePositionPatch
     {
         
         public static void Apply()
@@ -15,7 +13,7 @@ namespace ElevatedStopsEnabler.Patch
                     argumentTypes:new[] { typeof(Vector3), typeof(NetInfo.LaneType), typeof(VehicleInfo.VehicleType), typeof(VehicleInfo.VehicleType),
                     typeof(bool),
                     typeof(Vector3).MakeByRefType(), typeof(int).MakeByRefType(), typeof(float).MakeByRefType(), typeof(Vector3).MakeByRefType(), typeof(int).MakeByRefType(), typeof(float).MakeByRefType()}),
-                new PatchUtil.MethodDefinition(typeof(NetSegmentPatch_GetClosestLanePosition), nameof(Prefix))
+                new PatchUtil.MethodDefinition(typeof(GetClosestLanePositionPatch), nameof(Prefix))
             );
         }
 

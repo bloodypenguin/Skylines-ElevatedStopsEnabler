@@ -1,6 +1,7 @@
 ﻿using System;
 using CitiesHarmony.API;
-using ElevatedStopsEnabler.Patch;
+using ElevatedStopsEnabler.HarmonyPatches.NetSegmentPatches;
+using ElevatedStopsEnabler.HarmonyPatches.TransportLineAIPatches;
 using ICities;
 using ElevatedStopsEnabler.Util;
 
@@ -19,9 +20,9 @@ namespace ElevatedStopsEnabler
             {
                 ElevatedStops.AddElevatedStoptypes();
                 ElevatedStops.AllowStreetLightsOnElevatedStops();
-                NetSegmentPatch_GetClosestLanePosition.Apply();
-                TransportLineAIPatch_AddLaneConnection.Apply();
-                TransportLineAIPatch_RemoveLaneConnection.Apply();
+                GetClosestLanePositionPatch.Apply();
+                AddLaneConnectionPatch.Apply();
+                RemoveLaneConnectionPatch.Apply();
                 Log.Info("Patches deployed");
             }
             catch (Exception e)
@@ -38,9 +39,9 @@ namespace ElevatedStopsEnabler
             }
             try
             {
-                NetSegmentPatch_GetClosestLanePosition.Undo();
-                TransportLineAIPatch_AddLaneConnection.Undo();
-                TransportLineAIPatch_RemoveLaneConnection.Undo();
+                GetClosestLanePositionPatch.Undo();
+                AddLaneConnectionPatch.Undo();
+                RemoveLaneConnectionPatch.Undo();
                 Log.Info("patching reverted");
             }
             catch (Exception e)
