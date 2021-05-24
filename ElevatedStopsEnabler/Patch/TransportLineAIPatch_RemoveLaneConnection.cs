@@ -4,7 +4,7 @@ using ElevatedStopsEnabler.Util;
 namespace ElevatedStopsEnabler.Patch
 {
 
-    class TransportLineAIPatch_RemoveLaneConnection
+    internal class TransportLineAIPatch_RemoveLaneConnection
     {
         
         public static void Apply()

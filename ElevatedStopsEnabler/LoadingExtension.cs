@@ -1,4 +1,5 @@
 ﻿using System;
+using CitiesHarmony.API;
 using ElevatedStopsEnabler.Patch;
 using ICities;
 using ElevatedStopsEnabler.Util;
@@ -9,9 +10,11 @@ namespace ElevatedStopsEnabler
     {
         public override void OnLevelLoaded(LoadMode mode)
         {
-            Log.Info($"OnLevelLoaded: {mode}");
             base.OnLevelLoaded(mode);
-
+            if (!HarmonyHelper.IsHarmonyInstalled)
+            {
+                return;
+            }
             try
             {
                 ElevatedStops.AddElevatedStoptypes();
@@ -29,6 +32,10 @@ namespace ElevatedStopsEnabler
 
         public override void OnLevelUnloading()
         {
+            if (!HarmonyHelper.IsHarmonyInstalled)
+            {
+                return;
+            }
             try
             {
                 NetSegmentPatch_GetClosestLanePosition.Undo();

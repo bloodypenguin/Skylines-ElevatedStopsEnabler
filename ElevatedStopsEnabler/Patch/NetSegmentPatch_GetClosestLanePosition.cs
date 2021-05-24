@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ElevatedStopsEnabler.Patch
 {
-    class NetSegmentPatch_GetClosestLanePosition
+    internal class NetSegmentPatch_GetClosestLanePosition
     {
         
         public static void Apply()

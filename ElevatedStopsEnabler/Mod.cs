@@ -1,4 +1,5 @@
-﻿using ICities;
+﻿using CitiesHarmony.API;
+using ICities;
 
 namespace ElevatedStopsEnabler
 {
@@ -7,5 +8,9 @@ namespace ElevatedStopsEnabler
         public string Name => "Elevated Stops Enabler";
 
         public string Description => "Allows to place transport stops on elevated versions of roads";
+        
+        public void OnEnabled() {
+            HarmonyHelper.EnsureHarmonyInstalled();
+        }
     }
 }

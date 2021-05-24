@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace ElevatedStopsEnabler.Patch
 {
-    class TransportLineAIPatch_AddLaneConnection
+    internal class TransportLineAIPatch_AddLaneConnection
     {
         
         public static void Apply()
